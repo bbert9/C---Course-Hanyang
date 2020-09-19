@@ -1,0 +1,75 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	//Copy Paste the fucntion in the main to make it work. 
+	// I couldn't called a void function in the main...
+}
+
+void Maximum()
+{
+	int i1, i2, i3;
+	cout << "Enter first integer: ";
+	cin >> i1;
+	cout << "Enter second integer: ";
+	cin >> i2;
+	cout << "Enter third integer: ";
+	cin >> i3;
+	cout << endl;
+
+	if (i1 > i2 && i1 > i3)
+	{
+		cout << "The maximum is " << i1;
+	}
+	else if (i2 > i1 && i2 > i3)
+	{
+		cout << "The maximum is " << i2;
+	}
+	else
+	{
+		cout << "The maximum is " << i3;
+	}
+}
+
+void CummulativeSum()
+{
+	int input;
+	int sum = 0;
+	do
+	{
+		cout << "Enter numbers for the cumulative sum" << endl;
+		cin >> input;
+		sum += input;
+	} while (input != 0);
+	cout << "The cumulative sum is " << sum;
+}
+void GreatestCommonDivisor()
+{
+	//Compute the greaatest common divisor of two numbers a and b.
+	/* Internal computation :
+	* PGCD(a,b) = PGCD(a,a%b) so we do that until the rest of a%b==0 and then we have the PGCD
+	*/
+	int a;
+	int b;
+	int var;
+	int q;
+	cout << "Enter first integer a : " << endl;
+	cin >> a;
+	cout << "Enter the second interger b : " << endl;
+	cin >> b;
+	if (a<b)
+	{
+		var = a;
+		a = b;
+		b = var;
+	}
+	q = a % b; //the rest of the division of a and b
+	while (q!=0)
+	{
+		b = q;
+		q = a % b;
+	}
+	int PGCD = b;
+	cout << "The greatest common divisor is " << PGCD;
+}
