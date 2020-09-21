@@ -1,11 +1,6 @@
 #include <iostream>
 using namespace std;
 
-int main()
-{
-	//Copy Paste the fucntion in the main to make it work. 
-	// I couldn't called a void function in the main...
-}
 
 void Maximum()
 {
@@ -72,4 +67,11 @@ void GreatestCommonDivisor()
 	}
 	int PGCD = b;
 	cout << "The greatest common divisor is " << PGCD;
+}
+
+int main()
+{
+	Maximum();
+	CummulativeSum();
+	GreatestCommonDivisor();
 }
