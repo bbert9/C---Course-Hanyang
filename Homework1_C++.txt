@@ -75,6 +75,9 @@ void GreatestCommonDivisor()
 int main()
 {
 	Maximum();
+	cout << endl;
 	CummulativeSum();
+	cout << endl;
 	GreatestCommonDivisor();
+	cout << endl;
 }
