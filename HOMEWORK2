@@ -1,0 +1,113 @@
+#include <iostream>
+#include <list>
+#include <vector>
+using namespace std;
+
+int BinomialComputation(int n, int k)
+{
+	//compute the value of the binomial coeffcient :
+	//by reccursivity.
+	//(c(n,k) = c(n-1 , k-1) + c(n-1, k))
+
+	//if k ==0 or n then the result is one.
+	if (k==0||k==n)
+	{
+		return 1;
+	}
+	//recursive part
+	return BinomialComputation(n - 1, k - 1) + BinomialComputation(n - 1, k);
+}
+void swap(string string1, string string2)
+{
+	//this function permite to swap to parameters. Its useful for my PermuteNumbers Function
+	string tmp;
+	tmp = string1;
+	string1 = string2;
+	string2 = string1;
+}
+void PermuteNumbers(string thenumber, int beginning_index, int final_index)
+{ 
+	if (beginning_index == final_index)
+		cout << thenumber << endl;
+	else
+	{
+		for (int i = beginning_index; i <= final_index; i++) //We iterate trough all the index of the number
+		{
+			/*
+			for each index and number we start to change all the numbers so index that follows
+			For exemple "1234"
+			When we iterate at "12" we will call the function by recursion to do all the combinations
+			possible of "34"
+			After when we arrive to "123" we will compute all the combinations of "4" (there is just one).
+			*/
+			swap(thenumber[beginning_index], thenumber[i]); //Swap the two numbers
+			PermuteNumbers(thenumber, beginning_index + 1, final_index);//Call the function by recursion
+			swap(thenumber[beginning_index], thenumber[i]); //We go back to the number we had before
+		}
+	}
+}
+int sum_down(int x)
+{
+	if (x >= 0)
+	{
+		//cout << "boucle if" << endl;
+		x = x - 1;
+		int y = x + sum_down(x);
+		//cout << y + sum_down(x) << endl;
+		return y + sum_down(x);
+	}
+	else
+	{
+		//cout << "boucle else" << endl;
+		//cout << "FIN" << endl;
+		return 1;
+	}
+}
+int Answer_QUESTION1()
+{
+	int sum_down_int = 0;
+	int answer = 0;
+	while (sum_down_int < 1000000)
+	{
+		answer++;
+		sum_down_int = sum_down(answer);
+		cout << sum_down_int << endl;
+	}
+	cout << "ANSWER FOUND" << endl;
+	cout << "THE ANSWER IS X=" << answer << endl;
+	return answer;
+}
+int sum_down_without_recursion(int x)
+{
+	int sum = 0;
+	for (int i = 0; i < x; i++)
+	{
+		sum += i * 2 * (x - i)+x;
+	}
+	return sum;
+}
+
+void main()
+{
+	cout << "EXERCISE ONE : BINOMIAL COMPUTATION" << endl;
+	int k, n;
+	cout << "Enter k " << endl;
+	cin >> k;
+	cout << "Enter n " << endl;
+	cin >> n;
+	cout << "The result is " << BinomialComputation(n, k) << endl;
+	cout << endl;
+
+	cout << "The result with the recursion function" << sum_down(12) << endl;
+	cout << "The result i have with my function without recursion" << sum_down_without_recursion(12) << endl;
+	cout << "The results are different...";
+	cout << endl;
+	cout << "Exercise 3 : What is the lower number to obtain >10000000 ?" << endl;
+	Answer_QUESTION1(); //ANSWER IS 19
+	cout << endl;
+	cout << "Enter a number you want to find all the permutations possibles" << endl;
+	string input;
+	cin >> input;
+	int size = input.size();
+	PermuteNumbers(input, 0, size - 1);
+}
