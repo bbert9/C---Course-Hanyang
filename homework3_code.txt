@@ -1,0 +1,75 @@
+#include <iostream>
+#include<list>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+int Max(vector<int> count) //Basic function to compute the maximum of a vector
+{
+	int max = 0;
+	for (int i = 0; i < sizeof(count); i++)
+	{
+		if (count[i]>max)
+		{
+			max = count[i];
+		}
+	}
+	return max;
+}
+void Count_chars(char text[])
+{
+	char alphabet[] = "abcdefghijklmnopqrstuvwxyz";
+	vector<int> count({ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 });
+	for(int i = 0; i < strlen(text); i++)
+	{
+		text[i] = tolower(text[i]);
+	}
+
+	for (int i = 0; i < strlen(text); i++) //strtlen function to get the size of char[]
+	{
+		for (int j = 0; j < strlen(alphabet); j++)
+		{
+			if (text[i]==alphabet[j])
+			{
+				count[j]++;
+			}
+		}
+	}
+	//We can now print the result
+	vector<int> NumberToHighlight;
+	for (int d = 0; d < strlen(alphabet); d++)
+	{
+		cout << alphabet[d] << " : " << count[d] << endl;
+	}
+
+	//second part of the function to print the graph
+	cout << endl;
+	cout << endl;
+	string Upper_Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	for (int i = Max(count); i > 0; i--)
+	{
+		for (int j = 0; j < sizeof(Upper_Alphabet); j++)
+		{
+			if (count[j]==i)
+			{
+				cout << "*";
+				NumberToHighlight.push_back(j);
+			}
+			else if (std::count(NumberToHighlight.begin(), NumberToHighlight.end(),j))
+			{
+				cout << "*";
+			}
+			else
+			{
+				cout << " ";
+			}
+		}
+		cout << endl;
+	}
+	cout << Upper_Alphabet << endl;
+}
+void main()
+{
+	char test[] = "Bonjour, je m'appelle Bertrand";
+	Count_chars(test);
+}
